@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe6">
+  <title>Impressum | Valmonte Marketing</title>
+
+  <style>
+    :root {
+      --paper: #f2efe6;
+      --ink: #173328;
+      --moss: #65745b;
+      --clay: #bd7658;
+      --line: rgba(23, 51, 40, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+      isolation: isolate;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Monogramm-Datei im selben Ordner wie impressum.html ablegen. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("monogram-green-square.png");
+      background-position: center;
+      background-size: auto 92vh;
+      background-repeat: no-repeat;
+      opacity: 0.065;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: 5px;
+    }
+
+    a:hover {
+      color: var(--clay);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--clay);
+      outline-offset: 6px;
+    }
+
+    .shell {
+      width: min(1220px, calc(100% - 64px));
+      margin: auto;
+    }
+
+    .topbar {
+      min-height: 88px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .back {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5px;
+    }
+
+    main {
+      position: relative;
+      width: min(760px, calc(100% - 64px));
+      margin: 88px auto 100px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      font: 500 clamp(54px, 8vw, 88px)/1.05 Georgia, serif;
+      letter-spacing: -0.045em;
+      margin: 22px 0 54px;
+    }
+
+    h1::after {
+      content: ".";
+      color: var(--clay);
+    }
+
+    .details {
+      border-top: 1px solid var(--line);
+    }
+
+    section {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 18px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .number {
+      font: italic 18px Georgia, serif;
+      color: var(--clay);
+      padding-top: 3px;
+    }
+
+    h2 {
+      font: 500 27px/1.25 Georgia, serif;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #4b5d52;
+      margin: 0;
+    }
+
+    p a {
+      overflow-wrap: anywhere;
+    }
+
+    .return {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 38px;
+      padding: 17px 22px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .return:hover {
+      background: #294b3c;
+      color: var(--paper);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 34px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .signature {
+      font: italic 23px Georgia, serif;
+    }
+
+    footer small {
+      color: var(--moss);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      body::before {
+        background-size: auto 74vh;
+        opacity: 0.05;
+      }
+
+      .shell {
+        width: calc(100% - 36px);
+      }
+
+      .topbar {
+        min-height: 74px;
+      }
+
+      .brand {
+        font-size: 11px;
+      }
+
+      .back {
+        font-size: 9px;
+      }
+
+      main {
+        width: calc(100% - 40px);
+        margin: 58px auto 70px;
+      }
+
+      h1 {
+        margin-bottom: 36px;
+        font-size: 58px;
+      }
+
+      section {
+        grid-template-columns: 30px 1fr;
+        gap: 12px;
+        padding: 27px 0;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="index.html">Sarah Valmonte</a>
+    <a class="back" href="index.html">Zur Startseite ↗</a>
+  </header>
+
+  <main>
+    <div class="eyebrow">Rechtliches</div>
+    <h1>Impressum</h1>
+
+    <div class="details">
+      <section aria-labelledby="anbieter">
+        <span class="number" aria-hidden="true">01</span>
+
+        <div>
+          <h2 id="anbieter">Angaben gemäß § 5 DDG</h2>
+          <p>
+            Valmonte Marketing<br>
+            Inhaber: Daniel Janetzke<br>
+            Kaulbachstraße 48<br>
+            75175 Pforzheim
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="kontakt">
+        <span class="number" aria-hidden="true">02</span>
+
+        <div>
+          <h2 id="kontakt">Kontakt</h2>
+          <p>
+            E-Mail:
+            <a href="mailto:content@sarahvalmonte.com">
+              content@sarahvalmonte.com
+            </a><br>
+            Telefon:
+            <a href="tel:+4915129819779">0151 29819779</a>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <a class="return" href="index.html">
+      <span>Zurück zur Startseite</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </main>
+
+  <footer class="shell">
+    <span class="signature">Sarah Valmonte</span>
+    <small>Hotel &amp; Restaurant Content · Travel</small>
+  </footer>
+</body>
+</html>

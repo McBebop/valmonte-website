@@ -1,0 +1,209 @@
+
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sarah Valmonte · Creator Portfolio</title>
+  <style>
+    :root {
+      --paper: #f2efe6;
+      --ink: #173328;
+      --moss: #65745b;
+      --clay: #bd7658;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.6 Arial, sans-serif;
+    }
+    header, main, footer { max-width: 1200px; margin-inline: auto; }
+    header { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+    header img, footer img { width: 64px; height: 64px; object-fit: contain; }
+    h1, h2, h3 { font-family: Georgia, serif; }
+    h1 { font-size: clamp(38px, 7vw, 76px); line-height: 1; }
+    h1 em { color: var(--clay); }
+    .intro { max-width: 650px; margin-bottom: 36px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
+    button {
+      border: 1px solid var(--ink);
+      padding: 12px 18px;
+      color: var(--ink);
+      background: transparent;
+      font: inherit;
+      cursor: pointer;
+    }
+    button[aria-pressed="true"], button:hover {
+      color: var(--paper);
+      background: var(--ink);
+    }
+    #message { color: var(--moss); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .group-heading { grid-column: 1 / -1; margin: 24px 0 0; }
+    article { min-width: 0; }
+    article img, article video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #ddd;
+    }
+    .tag {
+      color: var(--moss);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    article h3 { margin: 8px 0; font-size: 1.5rem; }
+    [hidden] { display: none !important; }
+    footer { margin-top: 60px; }
+    @media (max-width: 600px) { body { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="monogram-green-square.png" alt="Sarah Valmonte Monogramm">
+    <strong>Sarah Valmonte · Creator Portfolio</strong>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>Restaurant · Reise · Hotel</p>
+      <h1>Momente, die<br><em>in Erinnerung</em> bleiben.</h1>
+      <p>Eigene Foto- und Videoarbeiten aus Restaurant, Reise, Sport und Hotel.</p>
+    </section>
+
+    <nav class="tabs" aria-label="Arbeitsproben nach Bereich">
+      <button type="button" data-filter="restaurant" aria-pressed="false">Restaurant &amp; Genuss</button>
+      <button type="button" data-filter="travel" aria-pressed="false">Reise &amp; Destination</button>
+      <button type="button" data-filter="hotel" aria-pressed="false">Hotel &amp; Aufenthalt</button>
+    </nav>
+
+    <p id="message">Wähle einen Bereich, um die passenden Arbeitsproben zu sehen.</p>
+    <section class="grid" id="gallery" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <img src="monogram-green-square.png" alt="Sarah Valmonte Monogramm">
+    <p>Sarah Valmonte · Eigene Aufnahmen</p>
+  </footer>
+
+  <script>
+    const samples = [
+      ["restaurant","food-fotostudie.mp4","food-story.jpeg","Kürbissuppe im Streiflicht","Restaurant · eigene Fotostudie"],
+      ["restaurant","restaurant-dinner.mp4","restaurant-dinner-poster.jpg","Ein Abendessen am Tisch","Restaurant · Food Reel"],
+      ["restaurant","restaurant-sweets.mp4","restaurant-sweets-poster.jpg","Süße Momente in Versailles","Food · Süßes"],
+      ["restaurant","restaurant-table.mp4","restaurant-table-poster.jpg","Frische Küche am Tisch","Restaurant · Food & Atmosphäre"],
+      ["restaurant","restaurant-lobster.mp4","restaurant-lobster-poster.jpg","Ein Teller, der auffällt","Restaurant · Food Reel"],
+      ["restaurant","restaurant-dessert-paris.mp4","restaurant-dessert-paris-poster.jpg","Ein Dessertmoment in Paris","Restaurant · Dessert & Drinks"],
+      ["restaurant","restaurant-carpaccio.jpeg","","Carpaccio mit Rucola und Parmesan","Food-Fotografie"],
+      ["restaurant","restaurant-camera-moment.jpeg","","Hinter der Kamera","Behind the scenes"],
+      ["restaurant","restaurant-aegli-cafe.mp4","restaurant-aegli-cafe-poster.jpg","Ein Abend im Aegli Café","Restaurant"],
+      ["restaurant","restaurant-paron-food.jpeg","","Gerichte bei Paron Beach Restaurant","Restaurant"],
+      ["restaurant","restaurant-ritual-drinks.jpeg","","Ein Cafébesuch bei Ritual","Café · Drinks"],
+      ["restaurant","restaurant-paron-drinks.jpeg","","Drinks am Strand","Restaurant · Beach Bar"],
+      ["restaurant","restaurant-grill-table.mp4","restaurant-grill-table-poster.jpg","Ein Tisch voller Aromen","Restaurant · Hauptgericht"],
+      ["restaurant","restaurant-food-variety.mp4","restaurant-food-variety-poster.jpg","Macarons von Ladurée","Genuss · Macarons"],
+      ["restaurant","restaurant-drink.mp4","restaurant-drink-poster.jpg","Ein Drink für unterwegs","Food & Drink"],
+      ["restaurant","restaurant-carpaccio-table.jpeg","","Carpaccio & Bruschetta","Restaurant · Food-Fotografie"],
+      ["restaurant","restaurant-family-brunch.mp4","restaurant-family-brunch-poster.jpg","Family Brunch bei C Food & Mood","Genuss · Family Brunch"],
+      ["restaurant","restaurant-brunch.jpeg","","Herzhafter Brunch","Food-Fotografie"],
+      ["restaurant","restaurant-seafood-pasta.jpeg","","Spaghetti mit Meeresfrüchten","Restaurant · Food-Fotografie"],
+      ["restaurant","restaurant-tea-baklava.jpeg","","Tee und Baklava","Genuss · Tee & Gebäck"],
+      ["restaurant","restaurant-bread-olive-oil.jpeg","","Brot, Olivenöl und Drinks","Restaurant · Genuss"],
+      ["restaurant","restaurant-bruschetta.jpeg","","Bruschetta mit Tomaten","Restaurant · Vorspeise"],
+      ["restaurant","restaurant-la-dolce-vita-menu.jpeg","","Ein Blick auf die Speisekarte","La Dolce Vita Trattoria"],
+
+      ["travel","travel-beach-raspberries.jpeg","","Kleine Stärkung am Strand","Reise · Strandmoment","Orte & Erlebnisse"],
+      ["travel","beach-travel.mp4","beach-travel-poster.jpg","Der Weg ans Meer","Reise","Orte & Erlebnisse"],
+      ["travel","travel-beach-day.mp4","travel-beach-day-poster.jpg","Strandtag und kleine Stopps","Reise · Vlog","Orte & Erlebnisse"],
+      ["travel","travel-kos-cafe.jpeg","","Ein Tag in Tingaki","Reise · Kos","Orte & Erlebnisse"],
+      ["travel","travel-beach-loungers.jpeg","","Ein Strandtag am Meer","Reise","Orte & Erlebnisse"],
+      ["travel","travel-austria-road.mp4","travel-austria-road-poster.jpg","Unterwegs im Bergtal","Reise · Österreich","Orte & Erlebnisse"],
+      ["travel","travel-palms.mp4","travel-palms-poster.jpg","Palmen im Sonnenlicht","Reise · Destination","Orte & Erlebnisse"],
+      ["travel","travel-local-shop.mp4","travel-local-shop-poster.jpg","Ein Ladenbesuch unterwegs","Reise · Local Finds","Orte & Erlebnisse"],
+
+      ["travel","sport-stairmaster.mp4","sport-stairmaster-poster.jpg","Training am Stairmaster","Sport · Training","Sport & Aktivitäten"],
+      ["travel","sport-jetski.mp4","sport-jetski-poster.jpg","Mit dem Jetski übers Wasser","Sport · Wassersport","Sport & Aktivitäten"],
+      ["travel","travel-hiking-gear.jpeg","","Bereit für draußen","Sport & Outdoor · Wandern","Sport & Aktivitäten"],
+      ["travel","sport-hiking-viewpoint.mp4","sport-hiking-viewpoint-poster.jpg","Wanderpause mit Bergblick","Sport · Wandern","Sport & Aktivitäten"],
+      ["travel","sport-hiking-forest.mp4","sport-hiking-forest-poster.jpg","Unterwegs im Wald","Sport & Outdoor · Wandern","Sport & Aktivitäten"],
+
+      ["hotel","hotel-story.mp4","hotel-story-poster.jpg","Zimmer mit Bergblick","Hotel · Roomtour"],
+      ["hotel","hotel-stay-balcony.jpeg","","Ein ruhiger Moment mit Bergblick","Hotel & Aufenthalt"],
+      ["hotel","hotel-bnb-kos.jpeg","","Ein Blick in ein neues BnB","Unterkunft · BnB"]
+    ];
+
+    const gallery = document.querySelector("#gallery");
+    const message = document.querySelector("#message");
+    const buttons = [...document.querySelectorAll("[data-filter]")];
+
+    function showCategory(category) {
+      buttons.forEach(button => {
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.filter === category)
+        );
+      });
+
+      gallery.replaceChildren();
+      let currentGroup = "";
+
+      samples.filter(item => item[0] === category).forEach(item => {
+        const [, file, poster, title, tag, group] = item;
+
+        if (group && group !== currentGroup) {
+          const heading = document.createElement("h2");
+          heading.className = "group-heading";
+          heading.textContent = group;
+          gallery.append(heading);
+          currentGroup = group;
+        }
+
+        const card = document.createElement("article");
+        const isVideo = file.endsWith(".mp4");
+        const media = document.createElement(isVideo ? "video" : "img");
+
+        if (isVideo) {
+          media.controls = true;
+          media.playsInline = true;
+          media.preload = "none";
+          if (poster) media.poster = poster;
+
+          const source = document.createElement("source");
+          source.src = file;
+          source.type = "video/mp4";
+          media.append(source);
+        } else {
+          media.src = file;
+          media.alt = title;
+          media.loading = "lazy";
+        }
+
+        const label = document.createElement("span");
+        label.className = "tag";
+        label.textContent = tag;
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        card.append(media, label, heading);
+        gallery.append(card);
+      });
+
+      message.hidden = true;
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => showCategory(button.dataset.filter));
+    });
+  </script>
+</body>
+</html>
